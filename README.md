@@ -29,6 +29,17 @@ README.md
 sounds/
 ```
 
+### Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/aandaradev/space-invaders-gpt.git
+   ```
+2. Navega al directorio del proyecto:
+   ```bash
+   cd space-invaders-gpt
+   ```
+
 ## Cómo Jugar
 
 1. Abre [`index.html`](https://github.com/aandaradev/space-invaders-gpt/blob/main/index.html) en tu navegador web.
@@ -38,10 +49,6 @@ sounds/
 5. Evita que los enemigos lleguen al fondo de la pantalla.
 6. Presiona "P" para pausar o reanudar el juego.
 7. Presiona Enter para reiniciar el juego cuando termine.
-
-## Capturas de Pantalla
-
-_Añade aquí algunas capturas de pantalla del juego en acción._
 
 ## Contribuciones
 
