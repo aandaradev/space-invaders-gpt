@@ -1,14 +1,16 @@
---
+[`README.md`](https://github.com/aandaradev/space-invaders-gpt/blob/main/README.md) de tu repositorio GitHub:
 
-# Pac-Man GPT Adventure
+---
 
-**Pac-Man GPT Adventure** es una implementación del clásico juego Pac-Man, desarrollada en HTML5, CSS y JavaScript con la ayuda del GPT Code Generator. Este proyecto es una excelente demostración de cómo crear un juego interactivo utilizando tecnologías web modernas.
+# Space Invaders GPT
+
+**Space Invaders GPT** es una implementación del clásico juego Space Invaders, desarrollada en HTML5, CSS y JavaScript con la ayuda del GPT Code Generator. Este proyecto es una excelente demostración de cómo crear un juego interactivo utilizando tecnologías web modernas.
 
 ## Características
 
 - **Gráficos en Canvas**: Utiliza el elemento `<canvas>` de HTML5 para renderizar gráficos en 2D.
-- **Control del Jugador**: Movimiento del jugador con las teclas de flecha.
-- **Fantasmas Inteligentes**: IA básica para los fantasmas que persiguen al jugador.
+- **Control del Jugador**: Movimiento del jugador con las teclas de flecha y disparo con la barra espaciadora.
+- **Enemigos y Power-Ups**: Generación aleatoria de enemigos y power-ups con aumento de dificultad a medida que avanzas de nivel.
 - **Sistema de Puntuación y Niveles**: Muestra la puntuación, las vidas restantes y el nivel actual en la pantalla.
 - **Reinicio del Juego**: Posibilidad de reiniciar el juego presionando la tecla Enter cuando el juego ha terminado.
 - **Pausa y Reanudación**: Pausa y reanuda el juego presionando la tecla "P".
@@ -29,12 +31,13 @@ sounds/
 
 ## Cómo Jugar
 
-1. Abre [`index.html`](https://github.com/aandaradev/Pac-Man-GPT-Adventure/blob/main/index.html) en tu navegador web.
-2. Usa las teclas de flecha para mover a Pac-Man.
-3. Come todos los puntos en el laberinto para avanzar al siguiente nivel.
-4. Evita a los fantasmas o cómete los puntos de poder para poder perseguirlos.
-5. Presiona "P" para pausar o reanudar el juego.
-6. Presiona Enter para reiniciar el juego cuando termine.
+1. Abre [`index.html`](https://github.com/aandaradev/space-invaders-gpt/blob/main/index.html) en tu navegador web.
+2. Usa las teclas de flecha izquierda y derecha para mover el jugador.
+3. Presiona la barra espaciadora para disparar a los enemigos.
+4. Recoge power-ups para obtener vidas adicionales.
+5. Evita que los enemigos lleguen al fondo de la pantalla.
+6. Presiona "P" para pausar o reanudar el juego.
+7. Presiona Enter para reiniciar el juego cuando termine.
 
 ## Capturas de Pantalla
 
@@ -46,6 +49,6 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull re
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [`LICENSE`](https://github.com/aandaradev/Pac-Man-GPT-Adventure/blob/main/LICENSE) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [`LICENSE`](https://github.com/aandaradev/space-invaders-gpt/blob/main/LICENSE) para más detalles.
 
 ---
