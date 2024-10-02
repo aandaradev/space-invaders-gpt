@@ -11,34 +11,52 @@ let derechaPresionada = false;
 let disparoPresionado = false;
 let balas = [];
 let enemigos = [];
-let powerUps = [];  // Array para almacenar los power-ups
+let powerUps = [];
 let puntos = 0;
-let vidas = 3;  // Contador de vidas
-let nivel = 1;  // Añadimos un sistema de niveles
-let juegoTerminado = false;  // Variable para controlar si el juego ha terminado
-let velocidadEnemigos = 2;  // Velocidad base de los enemigos
-let probabilidadAparicionEnemigos = 0.02;  // Probabilidad base de aparición de enemigos
-let probabilidadAparicionPowerUp = 0.005;  // Probabilidad base de aparición de power-ups
+let vidas = 3;
+let nivel = 1;
+let juegoTerminado = false;
+let juegoPausado = false;  // Variable para controlar si el juego está en pausa
+let velocidadEnemigos = 2;
+let probabilidadAparicionEnemigos = 0.02;
+let probabilidadAparicionPowerUp = 0.005;
 
 // Cargar los sonidos
-const sonidoDisparo = new Audio('sounds/disparo.mp3');  // Sonido de disparo
-const sonidoExplosion = new Audio('sounds/explosion.mp3');  // Sonido de explosión
+const sonidoDisparo = new Audio('sounds/disparo.mp3');
+const sonidoExplosion = new Audio('sounds/explosion.mp3');
 
 // Cargar imágenes de sprites
 const imagenJugador = new Image();
-imagenJugador.src = 'img/jugador.png';  // Imagen de la nave del jugador
+imagenJugador.src = 'img/jugador.png';
 
 const imagenEnemigo = new Image();
-imagenEnemigo.src = 'img/enemigo.png';  // Imagen de los enemigos
+imagenEnemigo.src = 'img/enemigo.png';
 
 // Jugador (avión)
 const jugador = {
     x: canvasWidth / 2 - 20,
     y: canvasHeight - 50,
-    width: 60,  // El tamaño de la imagen del jugador
+    width: 60,
     height: 60,
     velocidad: 5
 };
+
+// Función para pausar o reanudar el juego
+function pausarReanudarJuego() {
+    juegoPausado = !juegoPausado;
+    if (!juegoPausado) {
+        actualizar();  // Si se reanuda, continuar el ciclo del juego
+    }
+}
+
+// Función para mostrar el mensaje de pausa
+function mostrarPausa() {
+    ctx.fillStyle = 'white';
+    ctx.font = '50px Arial';
+    ctx.fillText('Juego Pausado', canvasWidth / 2 - 150, canvasHeight / 2);
+    ctx.font = '20px Arial';
+    ctx.fillText('Presiona "P" para reanudar', canvasWidth / 2 - 120, canvasHeight / 2 + 50);
+}
 
 // Clase Bala
 class Bala {
@@ -69,13 +87,13 @@ class Enemigo {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 60;  // El tamaño de la imagen del enemigo
+        this.width = 60;
         this.height = 50;
-        this.velocidad = velocidadEnemigos;  // Usamos la velocidad de los enemigos según el nivel
+        this.velocidad = velocidadEnemigos;
     }
 
     dibujar() {
-        ctx.drawImage(imagenEnemigo, this.x, this.y, this.width, this.height);  // Dibujar la imagen del enemigo
+        ctx.drawImage(imagenEnemigo, this.x, this.y, this.width, this.height);
     }
 
     mover() {
@@ -94,11 +112,11 @@ class PowerUp {
         this.y = y;
         this.width = 30;
         this.height = 30;
-        this.velocidad = 2;  // Velocidad de los power-ups
+        this.velocidad = 2;
     }
 
     dibujar() {
-        ctx.fillStyle = 'yellow';  // Color amarillo para los power-ups
+        ctx.fillStyle = 'yellow';
         ctx.beginPath();
         ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2, 0, Math.PI * 2);
         ctx.fill();
@@ -129,7 +147,7 @@ function crearBala() {
     balas.push(bala);
 
     // Reproducir el sonido de disparo
-    sonidoDisparo.currentTime = 0;  // Reiniciar el sonido para que se pueda reproducir varias veces seguidas
+    sonidoDisparo.currentTime = 0;
     sonidoDisparo.play();
 }
 
@@ -155,16 +173,13 @@ function detectarColisiones() {
                 bala.x + bala.width > enemigo.x &&
                 bala.y < enemigo.y + enemigo.height &&
                 bala.y + bala.height > enemigo.y) {
-                // Colisión detectada, eliminar enemigo y bala
                 enemigos.splice(enemigoIndex, 1);
                 balas.splice(balaIndex, 1);
                 puntos += 10;
 
-                // Reproducir el sonido de explosión
-                sonidoExplosion.currentTime = 0;  // Reiniciar el sonido
+                sonidoExplosion.currentTime = 0;
                 sonidoExplosion.play();
 
-                // Incrementar el nivel cada 100 puntos
                 if (puntos % 100 === 0) {
                     subirDeNivel();
                 }
@@ -180,9 +195,8 @@ function detectarColisionPowerUps() {
             jugador.x + jugador.width > powerUp.x &&
             jugador.y < powerUp.y + powerUp.height &&
             jugador.y + jugador.height > powerUp.y) {
-            // El jugador ha recogido un power-up, gana una vida
             vidas += 1;
-            powerUps.splice(index, 1);  // Eliminar el power-up
+            powerUps.splice(index, 1);
         }
     });
 }
@@ -190,13 +204,13 @@ function detectarColisionPowerUps() {
 // Subir de nivel: Incrementar dificultad
 function subirDeNivel() {
     nivel += 1;
-    velocidadEnemigos += 0.5;  // Aumentar la velocidad de los enemigos con cada nivel
-    probabilidadAparicionEnemigos += 0.01;  // Aumentar la probabilidad de aparición de enemigos
+    velocidadEnemigos += 0.5;
+    probabilidadAparicionEnemigos += 0.01;
 }
 
 // Dibujar el jugador
 function dibujarJugador() {
-    ctx.drawImage(imagenJugador, jugador.x, jugador.y, jugador.width, jugador.height);  // Dibujar la imagen del jugador
+    ctx.drawImage(imagenJugador, jugador.x, jugador.y, jugador.width, jugador.height);
 }
 
 // Dibujar puntos, vidas y nivel
@@ -219,22 +233,19 @@ function mostrarGameOver() {
 
 // Función para reiniciar el juego
 function reiniciarJuego() {
-    // Restablecer variables del juego
     puntos = 0;
     vidas = 3;
     nivel = 1;
     balas = [];
     enemigos = [];
-    powerUps = [];  // Reiniciar los power-ups
+    powerUps = [];
     juegoTerminado = false;
-    velocidadEnemigos = 2;  // Restablecer la velocidad inicial
-    probabilidadAparicionEnemigos = 0.02;  // Restablecer la probabilidad inicial
+    velocidadEnemigos = 2;
+    probabilidadAparicionEnemigos = 0.02;
 
-    // Restablecer posición del jugador
     jugador.x = canvasWidth / 2 - jugador.width / 2;
     jugador.y = canvasHeight - 50;
 
-    // Reiniciar el ciclo del juego
     actualizar();
 }
 
@@ -242,7 +253,12 @@ function reiniciarJuego() {
 function actualizar() {
     if (juegoTerminado) {
         mostrarGameOver();
-        return;  // Detener el juego si ha terminado
+        return;
+    }
+
+    if (juegoPausado) {
+        mostrarPausa();
+        return;
     }
 
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -250,7 +266,6 @@ function actualizar() {
     moverJugador();
     dibujarJugador();
 
-    // Mover y dibujar balas
     balas.forEach((bala, index) => {
         bala.mover();
         bala.dibujar();
@@ -260,42 +275,38 @@ function actualizar() {
         }
     });
 
-    // Crear enemigos periódicamente según la probabilidad
     if (Math.random() < probabilidadAparicionEnemigos) {
         crearEnemigo();
     }
 
-    // Crear power-ups periódicamente según la probabilidad
     if (Math.random() < probabilidadAparicionPowerUp) {
         crearPowerUp();
     }
 
-    // Mover y dibujar enemigos
     enemigos.forEach((enemigo, index) => {
         enemigo.mover();
         enemigo.dibujar();
 
         if (enemigo.fueraDePantalla()) {
             enemigos.splice(index, 1);
-            vidas -= 1;  // El jugador pierde una vida
+            vidas -= 1;
             if (vidas <= 0) {
                 juegoTerminado = true;
             }
         }
     });
 
-    // Mover y dibujar power-ups
     powerUps.forEach((powerUp, index) => {
         powerUp.mover();
         powerUp.dibujar();
 
         if (powerUp.fueraDePantalla()) {
-            powerUps.splice(index, 1);  // Eliminar power-up si sale de la pantalla
+            powerUps.splice(index, 1);
         }
     });
 
     detectarColisiones();
-    detectarColisionPowerUps();  // Detectar si el jugador recoge un power-up
+    detectarColisionPowerUps();
     dibujarPuntosVidasYNivel();
 
     requestAnimationFrame(actualizar);
@@ -310,8 +321,10 @@ document.addEventListener('keydown', (e) => {
         crearBala();
     }
     if (e.key === 'Enter' && juegoTerminado) {
-        // Si el juego ha terminado, reiniciarlo cuando se presiona Enter
         reiniciarJuego();
+    }
+    if (e.key === 'p' || e.key === 'P') {
+        pausarReanudarJuego();  // Pausar o reanudar el juego al presionar "P"
     }
 });
 
