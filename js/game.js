@@ -24,12 +24,19 @@ let probabilidadAparicionPowerUp = 0.005;  // Probabilidad base de aparición de
 const sonidoDisparo = new Audio('sounds/disparo.mp3');  // Sonido de disparo
 const sonidoExplosion = new Audio('sounds/explosion.mp3');  // Sonido de explosión
 
+// Cargar imágenes de sprites
+const imagenJugador = new Image();
+imagenJugador.src = 'img/jugador.png';  // Imagen de la nave del jugador
+
+const imagenEnemigo = new Image();
+imagenEnemigo.src = 'img/enemigo.png';  // Imagen de los enemigos
+
 // Jugador (avión)
 const jugador = {
     x: canvasWidth / 2 - 20,
     y: canvasHeight - 50,
-    width: 40,
-    height: 40,
+    width: 60,  // El tamaño de la imagen del jugador
+    height: 60,
     velocidad: 5
 };
 
@@ -62,14 +69,13 @@ class Enemigo {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 30;
+        this.width = 60;  // El tamaño de la imagen del enemigo
+        this.height = 50;
         this.velocidad = velocidadEnemigos;  // Usamos la velocidad de los enemigos según el nivel
     }
 
     dibujar() {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(imagenEnemigo, this.x, this.y, this.width, this.height);  // Dibujar la imagen del enemigo
     }
 
     mover() {
@@ -190,8 +196,7 @@ function subirDeNivel() {
 
 // Dibujar el jugador
 function dibujarJugador() {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(jugador.x, jugador.y, jugador.width, jugador.height);
+    ctx.drawImage(imagenJugador, jugador.x, jugador.y, jugador.width, jugador.height);  // Dibujar la imagen del jugador
 }
 
 // Dibujar puntos, vidas y nivel
