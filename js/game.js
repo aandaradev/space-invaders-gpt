@@ -20,6 +20,10 @@ let velocidadEnemigos = 2;  // Velocidad base de los enemigos
 let probabilidadAparicionEnemigos = 0.02;  // Probabilidad base de aparición de enemigos
 let probabilidadAparicionPowerUp = 0.005;  // Probabilidad base de aparición de power-ups
 
+// Cargar los sonidos
+const sonidoDisparo = new Audio('sounds/disparo.mp3');  // Sonido de disparo
+const sonidoExplosion = new Audio('sounds/explosion.mp3');  // Sonido de explosión
+
 // Jugador (avión)
 const jugador = {
     x: canvasWidth / 2 - 20,
@@ -117,6 +121,10 @@ function moverJugador() {
 function crearBala() {
     const bala = new Bala(jugador.x + jugador.width / 2 - 2.5, jugador.y);
     balas.push(bala);
+
+    // Reproducir el sonido de disparo
+    sonidoDisparo.currentTime = 0;  // Reiniciar el sonido para que se pueda reproducir varias veces seguidas
+    sonidoDisparo.play();
 }
 
 // Crear enemigos aleatoriamente
@@ -145,6 +153,10 @@ function detectarColisiones() {
                 enemigos.splice(enemigoIndex, 1);
                 balas.splice(balaIndex, 1);
                 puntos += 10;
+
+                // Reproducir el sonido de explosión
+                sonidoExplosion.currentTime = 0;  // Reiniciar el sonido
+                sonidoExplosion.play();
 
                 // Incrementar el nivel cada 100 puntos
                 if (puntos % 100 === 0) {
