@@ -1,0 +1,33 @@
+/* Estilo global para eliminar márgenes y centrado */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo para el cuerpo de la página */
+body {
+  background-color: #000; /* Fondo negro */
+  color: white; /* Color del texto */
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Asegura que la página ocupa toda la altura */
+}
+
+/* Estilo para el canvas */
+canvas {
+  background-color: #111; /* Fondo oscuro del canvas */
+  border: 2px solid #fff; /* Borde blanco alrededor del canvas */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Sombra para dar un efecto de brillo */
+}
+
+/* Estilo para el texto de instrucciones */
+#instructions {
+  margin-top: 20px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7); /* Texto ligeramente translúcido */
+  text-align: center;
+}
