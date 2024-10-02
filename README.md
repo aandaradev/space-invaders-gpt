@@ -1,5 +1,3 @@
-[`README.md`](https://github.com/aandaradev/space-invaders-gpt/blob/main/README.md) de tu repositorio GitHub:
-
 ---
 
 # Space Invaders GPT
