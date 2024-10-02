@@ -1,5 +1,3 @@
----
-
 # Space Invaders GPT
 
 **Space Invaders GPT** es una implementación del clásico juego Space Invaders, desarrollada en HTML5, CSS y JavaScript con la ayuda del GPT Code Generator. Este proyecto es una excelente demostración de cómo crear un juego interactivo utilizando tecnologías web modernas.
@@ -55,5 +53,3 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull re
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [`LICENSE`](https://github.com/aandaradev/space-invaders-gpt/blob/main/LICENSE) para más detalles.
-
----
